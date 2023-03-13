@@ -1,0 +1,10 @@
+{
+	"app": "npx ts-node --prefer-ts-exts src/app.ts",
+	"context": {
+		"@aws-cdk/core:stackRelativeExports": "false",
+		"@aws-cdk/core:bootstrapQualifier": "driftcheck",
+		"appName": "cdk-drift-detect-demo",
+		"project": "cdk-drift-detect-demo",
+		"org": "cdk-drift-detect-demo"
+	}
+}
