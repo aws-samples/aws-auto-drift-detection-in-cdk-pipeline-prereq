@@ -19,7 +19,7 @@ Before proceeding any further, you need to identify and designate an AWS account
 
 ## Project Structure
 
-Project is a part of the solution to integrate automated drift detection in CDK pipelines. It deploys a stack under `src/` folder which is a pre-requsite to the forementioned solution. `src/prereq-stack/stack.ts` deploys following resources
+Project is the pre-requisite part of the solution to integrate automated drift detection in CDK pipelines. Github repo for the other part of the solution can be found [here](https://github.com/aws-samples/aws-auto-drift-detection-in-cdk-pipeline) It deploys a stack under `src/` folder which is a pre-requsite to the forementioned solution. `src/prereq-stack/stack.ts` deploys following resources
 
 > drift-detect-lambda
 > callback-lambda
