@@ -17,15 +17,15 @@
  */
 
 'use strict';
-import { DynamoDB } from '@aws-sdk/client-dynamodb';
 import {
 	CodePipeline,
 	FailureDetails,
-	PutJobSuccessResultCommandOutput,
 	PutJobFailureResultCommandOutput,
+	PutJobSuccessResultCommandOutput,
 } from '@aws-sdk/client-codepipeline';
+import { DynamoDB, GetItemCommandOutput } from '@aws-sdk/client-dynamodb';
 
-console.info('Loading calllback lambda');
+console.info('Loading callback lambda');
 
 /**
  * Lambda handler
@@ -104,21 +104,25 @@ async function fetchCallbackDetails(event: any) {
 	const stackRegion = event['region'];
 	const driftDetectId = event['detail']['stack-drift-detection-id'];
 	const ddbClient = new DynamoDB({ region: process.env.AWS_REGION });
-	const resp = await ddbClient.getItem({
-		TableName: process.env.DDB_TABLE,
-		Key: {
-			pk: {
-				S: `${stackAccount}#${stackRegion}#${stackName}`,
-			},
-			sk: {
-				S: driftDetectId,
-			},
-		},
-	});
-	console.debug(JSON.stringify(resp));
 	let jobId;
-	if (resp.Item) {
-		jobId = resp.Item['pipeline_job_id']['S'];
+	try {
+		const resp: GetItemCommandOutput = await ddbClient.getItem({
+			TableName: process.env.DDB_TABLE,
+			Key: {
+				pk: {
+					S: `${stackAccount}#${stackRegion}#${stackName}`,
+				},
+				sk: {
+					S: driftDetectId,
+				},
+			},
+		});
+		console.debug(JSON.stringify(resp));
+		if (resp.Item) {
+			jobId = resp.Item['pipeline_job_id']['S'];
+		}
+	} catch (err: any) {
+		console.error(JSON.stringify(err));
 	}
 	return jobId;
 }

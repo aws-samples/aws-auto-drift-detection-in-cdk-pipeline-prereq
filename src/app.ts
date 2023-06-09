@@ -18,10 +18,10 @@
  */
 
 'use strict';
-import 'source-map-support/register';
-import { App, Tags, Aspects } from 'aws-cdk-lib';
+import { App, Aspects, Tags } from 'aws-cdk-lib';
 import { AwsSolutionsChecks } from 'cdk-nag';
-import { DriftDetectionPrereqStack } from './prereq-stack/stack';
+import 'source-map-support/register';
+import { DriftDetectionPrereqStack } from 'src/prereq-stack/stack';
 
 const app = new App();
 const appName = app.node.tryGetContext('appName');
