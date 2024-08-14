@@ -17,21 +17,26 @@
  */
 
 'use strict';
-import { Construct } from 'constructs';
-import { RemovalPolicy, Stack, StackProps, Duration } from 'aws-cdk-lib';
-import { aws_lambda as lambda } from 'aws-cdk-lib';
-import { aws_iam as iam } from 'aws-cdk-lib';
-import { aws_ssm as ssm } from 'aws-cdk-lib';
-import { aws_dynamodb as dynamodb } from 'aws-cdk-lib';
-import { aws_events as events } from 'aws-cdk-lib';
-import { aws_events_targets as targets } from 'aws-cdk-lib';
-import { NagSuppressions } from 'cdk-nag';
 import {
-	SSM_PARAM_DRIFT_DETECT_DB_ARN,
-	SSM_PARAM_EXT_LIB_LAYER,
-	SSM_PARAM_DRIFT_DETECT_LAMBDA_ARN,
+	Duration,
+	RemovalPolicy,
+	Stack,
+	StackProps,
+	aws_dynamodb as dynamodb,
+	aws_events as events,
+	aws_iam as iam,
+	aws_lambda as lambda,
+	aws_ssm as ssm,
+	aws_events_targets as targets,
+} from 'aws-cdk-lib';
+import { NagSuppressions } from 'cdk-nag';
+import { Construct } from 'constructs';
+import {
 	SSM_PARAM_CALLBACK_LAMBDA_ARN,
-} from '../utils/cdk-utils';
+	SSM_PARAM_DRIFT_DETECT_DB_ARN,
+	SSM_PARAM_DRIFT_DETECT_LAMBDA_ARN,
+	SSM_PARAM_EXT_LIB_LAYER,
+} from 'src/utils/cdk-utils';
 
 /**
  * Stack to deploy common components and lambda layers required for the project

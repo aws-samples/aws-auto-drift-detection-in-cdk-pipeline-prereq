@@ -21,11 +21,14 @@
 		"strictPropertyInitialization": false,
 		"incremental": true,
 		"typeRoots": ["./node_modules/@types"],
-		"baseUrl": "./",
+		"baseUrl": ".",
 		"paths": {
-			"/opt/common/*": ["src/main/stacks/demo/layer/common/common/*"]
+			"src": ["src/*"]
 		}
 	},
 	"include": ["__mocks__/**/*", "src/**/*", "test/**/*", "src/app.ts"],
-	"exclude": ["node_modules", "dist", "cdk.out"]
+	"exclude": ["node_modules", "dist", "cdk.out"],
+	"ts-node": {
+		"require": ["tsconfig-paths/register"]
+	}
 }

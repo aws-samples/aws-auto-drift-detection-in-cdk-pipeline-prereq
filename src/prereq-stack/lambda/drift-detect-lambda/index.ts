@@ -17,18 +17,18 @@
  */
 
 'use strict';
-import { DynamoDB } from '@aws-sdk/client-dynamodb';
 import {
 	CloudFormation,
-	DetectStackDriftCommandOutput,
 	DescribeStacksCommandOutput,
+	DetectStackDriftCommandOutput,
 } from '@aws-sdk/client-cloudformation';
 import {
 	CodePipeline,
 	FailureDetails,
-	PutJobSuccessResultCommandOutput,
 	PutJobFailureResultCommandOutput,
+	PutJobSuccessResultCommandOutput,
 } from '@aws-sdk/client-codepipeline';
+import { DynamoDB } from '@aws-sdk/client-dynamodb';
 
 console.info('Loading initiate drift detection lambda');
 
@@ -71,7 +71,7 @@ exports.handler = async (event: any, context: any) => {
 		return;
 	}
 	// Prepare for drift detection
-	const allowed_dd_status_list: string[] = [
+	const allowedDdStatusList: string[] = [
 		'CREATE_COMPLETE',
 		'UPDATE_COMPLETE',
 		'UPDATE_ROLLBACK_COMPLETE',
@@ -90,7 +90,7 @@ exports.handler = async (event: any, context: any) => {
 			console.info('Stack exists, now check for the stack status');
 			if (
 				stacksOutput.Stacks[0].StackStatus &&
-				allowed_dd_status_list.includes(stacksOutput.Stacks[0].StackStatus)
+				allowedDdStatusList.includes(stacksOutput.Stacks[0].StackStatus)
 			) {
 				console.info('Stack Status allows for drift detection');
 				driftResp = await cfnClient.detectStackDrift({
