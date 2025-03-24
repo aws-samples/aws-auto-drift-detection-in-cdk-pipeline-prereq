@@ -19,7 +19,7 @@
 		"@types/node": "^18.14.2",
 		"@typescript-eslint/eslint-plugin": "^5.54.0",
 		"@typescript-eslint/parser": "^5.54.0",
-		"aws-cdk-lib": "^2.81.0",
+		"aws-cdk-lib": "^2.185.0",
 		"cdk-nag": "^2.22.19",
 		"constructs": "^10.1.262",
 		"eslint": "^8.35.0",
